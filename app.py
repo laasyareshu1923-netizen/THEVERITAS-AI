@@ -8,13 +8,13 @@ st.set_page_config(page_title="Veritas - Fake News Detector", page_icon="🔎", 
 st.title("🔎 Veritas: Real-Time Fact Checker")
 st.caption("Verify claims instantly using Google Gemini machine learning.")
 
-# 🔑 SECURE SECRET EXTRACTION (From your Streamlit Cloud Dashboard Settings)
+# 🔑 SECURE SECRET EXTRACTION
 try:
     MASTER_API_KEY = st.secrets["GEMINI_API_KEY"]
 except Exception:
     MASTER_API_KEY = ""
 
-# Sidebar for User Tier Selection (Clean, no API fields)
+# Sidebar for User Tier Selection (No API Key inputs)
 with st.sidebar:
     st.header("📍 Verification Scope")
     level = st.radio(
@@ -41,7 +41,7 @@ if st.button("🚀 Verify Claim", use_container_width=True):
                 # Initialize Gemini API automatically via Cloud Secrets
                 genai.configure(api_key=MASTER_API_KEY)
                 
-                # 🛠️ FIXED: Updated to the live active production endpoint for Google AI Studio
+                # 🛠️ FIXED: Replaced legacy string with the current production model alias
                 model = genai.GenerativeModel("gemini-3.6-flash")
                 
                 # Dynamic context rules based on user selected tier
@@ -54,9 +54,15 @@ if st.button("🚀 Verify Claim", use_container_width=True):
                     regional_context = "Cross-reference deeply with Andhra Pradesh regional desks of major Telugu dailies like Eenadu, Sakshi, Andhra Jyothy, and Vartha."
                     location_context = f"specifically within the local context of Visakhapatnam (Vizag). {regional_context}"
 
-                # Structured prompt engineering targeting the selected tier
+                # Structured prompt engineering targeting the selected tier with timeline insights
                 prompt = f"""
                 You are an expert AI fact-checker analyzing news {location_context}.
+                
+                CRITICAL INSTRUCTION: Analyze the text using a comprehensive timeline framework:
+                - PAST: Deep historical baselines and archival metrics.
+                - PRESENT: Ongoing established operational standards.
+                - LIVE: Closely review absolute breaking events up to today in August 2026. Prioritize sudden changes, new corporate restructurings, or fresh press updates that reverse or conflict with prior facts.
+                
                 Analyze the following claim for accuracy against the relevant databases, newspapers, and official circulars for this geographical tier.
                 
                 Claim to evaluate: "{claim_input}"
@@ -111,4 +117,4 @@ if st.button("🚀 Verify Claim", use_container_width=True):
                         
             except Exception as e:
                 st.error(f"An error occurred during analysis: {str(e)}")
-              
+                
