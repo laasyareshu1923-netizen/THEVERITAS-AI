@@ -81,7 +81,7 @@ if st.button("🚀 Verify Claim", use_container_width=True):
                 st.divider()
                 st.subheader("📊 Analysis Results")
                 
-                col1, col2 = st.columns()
+                col1, col2 = st.columns(2)
                 
                 with col1:
                     verdict = data.get("verdict", "UNKNOWN")
