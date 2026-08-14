@@ -3,9 +3,9 @@ import google.generativeai as genai
 import json
 
 # App Configuration
-st.set_page_config(page_title="Veritas - Fake News Detector", page_icon="🔎", layout="wide")
+st.set_page_config(page_title="Veritas AI - Fake News Detector", page_icon="🔎", layout="wide")
 
-st.title("🔎 Veritas: Real-Time Fact Checker")
+st.title("🔎 Veritas AI: Real-Time Fact Checker")
 st.caption("Verify claims instantly using Google Gemini machine learning.")
 # --- ADD THIS TIME WARNING SECTION AT THE TOP ---
 import datetime
@@ -66,6 +66,9 @@ if st.button("🚀 Verify Claim", use_container_width=True):
                     # Local Tier focusing on Visakhapatnam
                     regional_context = "Cross-reference deeply with Andhra Pradesh regional desks of major Telugu dailies like Eenadu, Sakshi, Andhra Jyothy, and Vartha."
                     location_context = f"specifically within the local context of Visakhapatnam (Vizag). {regional_context}"
+                from datetime import datetime
+
+                current_date_str = datetime.now().strftime("%B %Y")
 
                 # Structured prompt engineering targeting the selected tier with timeline insights
                 prompt = f"""
@@ -74,7 +77,7 @@ if st.button("🚀 Verify Claim", use_container_width=True):
                 CRITICAL INSTRUCTION: Analyze the text using a comprehensive timeline framework:
                 - PAST: Deep historical baselines and archival metrics.
                 - PRESENT: Ongoing established operational standards.
-                - LIVE: Closely review absolute breaking events up to today in August 2026. Prioritize sudden changes, new corporate restructurings, or fresh press updates that reverse or conflict with prior facts.
+                - LIVE: Closely review absolute breaking events up to today in {current_date_str}. Prioritize sudden changes, new corporate restructurings, or fresh press updates that reverse or conflict with prior facts.
                 
                 Analyze the following claim for accuracy against the relevant databases, newspapers, and official circulars for this geographical tier.
                 
