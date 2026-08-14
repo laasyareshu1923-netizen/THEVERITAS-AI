@@ -1,3 +1,4 @@
+from datetime import datetime
 import streamlit as st
 import google.generativeai as genai
 import json
@@ -66,7 +67,7 @@ if st.button("🚀 Verify Claim", use_container_width=True):
                     # Local Tier focusing on Visakhapatnam
                     regional_context = "Cross-reference deeply with Andhra Pradesh regional desks of major Telugu dailies like Eenadu, Sakshi, Andhra Jyothy, and Vartha."
                     location_context = f"specifically within the local context of Visakhapatnam (Vizag). {regional_context}"            
-        from datetime import datetime
+
 
                 current_date_str = datetime.now().strftime("%B %Y")
 
