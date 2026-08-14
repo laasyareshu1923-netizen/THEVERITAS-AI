@@ -1,4 +1,4 @@
-from datetime import datetime
+import datetime
 import streamlit as st
 import google.generativeai as genai
 import json
@@ -69,7 +69,8 @@ if st.button("🚀 Verify Claim", use_container_width=True):
                     location_context = f"specifically within the local context of Visakhapatnam (Vizag). {regional_context}"            
 
 
-                current_date_str = datetime.now().strftime("%B %Y")
+                current_date_str = datetime.datetime.now().strftime("%B %Y")
+                
 
                 # Structured prompt engineering targeting the selected tier with timeline insights
                 prompt = f"""
