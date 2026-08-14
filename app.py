@@ -7,7 +7,20 @@ st.set_page_config(page_title="Veritas - Fake News Detector", page_icon="🔎", 
 
 st.title("🔎 Veritas: Real-Time Fact Checker")
 st.caption("Verify claims instantly using Google Gemini machine learning.")
+# --- ADD THIS TIME WARNING SECTION AT THE TOP ---
+import datetime
 
+# Get the current time in India (IST)
+now_ist = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=5, minutes=30)))
+
+# Check if the current time is in the morning (before 1:30 PM IST)
+if now_ist.hour < 13 or (now_ist.hour == 13 and now_ist.minute < 30):
+    st.warning(
+        "⚠️ **Daily Limit Notice:** The shared free tier key resets daily at **1:30 PM IST**. "
+        "If the app throws an error right now, please try again after 1:30 PM, or paste your own private API key in the sidebar to bypass the limit instantly!",
+        icon="⏰"
+    )
+    
 # 🔑 SECURE SECRET EXTRACTION
 try:
     MASTER_API_KEY = st.secrets["GEMINI_API_KEY"]
